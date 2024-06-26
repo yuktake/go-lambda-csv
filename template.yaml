@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Resources:
+  CsvProcessingFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName: read-csv
+      Handler: bootstrap
+      Runtime: provided.al2
+      CodeUri: ./bootstrap.zip
+      MemorySize: 256
+      Timeout: 60
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref DataTable
+      Events:
+        CsvUpload:
+          Type: Api
+          Properties:
+            Path: /upload
+            Method: post
+
+  DataTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: table-name
+      AttributeDefinitions:
+        - AttributeName: ID
+          AttributeType: S
+      KeySchema:
+        - AttributeName: ID
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST

@@ -1,0 +1,34 @@
+# Go のビルド出力
+/bin/
+/pkg/
+/build/
+
+# コンパイルされたバイナリファイル
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Go のモジュールキャッシュ
+go.sum
+
+# 一時ファイル
+*.tmp
+*.temp
+*.log
+
+# システム特有のファイル
+.DS_Store
+Thumbs.db
+
+# IDE 特有のファイル
+.vscode/
+.idea/
+*.iml
+
+# ローカル環境の設定ファイル
+bootstrap
+bootstrap.zip
+
+# AWS SAM CLI configuration file
+samconfig.toml
